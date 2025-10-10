@@ -40,7 +40,7 @@ class JwtService {
     }
 
     fun getWizardIdFromToken(token: String): Long? {
-        return getClaimsFromToken(token)?.get("id", Long::class.java)
+        return getClaimsFromToken(token)?.get("id", Number::class.java)?.toLong()
     }
 
     fun validateToken(token: String): Boolean {
