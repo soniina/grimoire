@@ -1,4 +1,4 @@
-package itmo.infosystems.grimoire.dto
+package itmo.infosystems.grimoire.dto.requests
 
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull

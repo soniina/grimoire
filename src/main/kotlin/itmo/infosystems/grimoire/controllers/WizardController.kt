@@ -1,6 +1,6 @@
 package itmo.infosystems.grimoire.controllers
 
-import itmo.infosystems.grimoire.dto.WizardResponse
+import itmo.infosystems.grimoire.dto.responses.WizardResponse
 import itmo.infosystems.grimoire.security.WizardPrincipal
 import itmo.infosystems.grimoire.services.WizardService
 import org.springframework.security.core.annotation.AuthenticationPrincipal

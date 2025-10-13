@@ -1,9 +1,9 @@
-package itmo.infosystems.grimoire.dto
+package itmo.infosystems.grimoire.dto.requests
 
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 
-data class HumanRequest (
+data class HumanRequest(
     @field:NotNull
     @field:NotBlank
     val name: String? = null,

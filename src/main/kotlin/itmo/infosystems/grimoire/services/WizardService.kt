@@ -1,6 +1,6 @@
 package itmo.infosystems.grimoire.services
 
-import itmo.infosystems.grimoire.dto.WizardResponse
+import itmo.infosystems.grimoire.dto.responses.WizardResponse
 import itmo.infosystems.grimoire.repositories.WizardRepository
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service

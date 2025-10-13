@@ -1,8 +1,8 @@
 package itmo.infosystems.grimoire.services
 
-import RegisterRequest
-import itmo.infosystems.grimoire.dto.AuthResponse
-import itmo.infosystems.grimoire.dto.LoginRequest
+import itmo.infosystems.grimoire.dto.requests.RegisterRequest
+import itmo.infosystems.grimoire.dto.responses.AuthResponse
+import itmo.infosystems.grimoire.dto.requests.LoginRequest
 import itmo.infosystems.grimoire.models.Human
 import itmo.infosystems.grimoire.models.Wizard
 import itmo.infosystems.grimoire.repositories.GuildRepository
@@ -33,20 +33,27 @@ class AuthService(
             guild = request.guildId?.let { guildRepository.findByIdOrNull(it) }
         ))
 
-        humanRepository.save(Human(
-            name = requireNotNull(request.name),
-            surname = requireNotNull(request.surname),
-            wizard = wizard
-        ))
+        humanRepository.save(
+            Human(
+                name = requireNotNull(request.name),
+                surname = requireNotNull(request.surname),
+                wizard = wizard
+            )
+        )
 
         return AuthResponse(jwtService.generateToken(wizard.id, wizard.login))
     }
 
     @Transactional
     fun login(request: LoginRequest): AuthResponse {
-        val wizard = wizardRepository.findByLogin(requireNotNull(request.login)) ?: throw IllegalArgumentException("Invalid login or password")
+        val wizard = wizardRepository.findByLogin(requireNotNull(request.login))
+            ?: throw IllegalArgumentException("Invalid login or password")
 
-        if (!passwordEncoder.matches(request.password, wizard.password)) throw IllegalArgumentException("Invalid login or password")
+        if (!passwordEncoder.matches(
+                request.password,
+                wizard.password
+            )
+        ) throw IllegalArgumentException("Invalid login or password")
 
         return AuthResponse(jwtService.generateToken(wizard.id, wizard.login))
     }

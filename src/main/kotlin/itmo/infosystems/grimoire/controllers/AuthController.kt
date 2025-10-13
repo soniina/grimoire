@@ -1,7 +1,8 @@
 package itmo.infosystems.grimoire.controllers
 
-import RegisterRequest
-import itmo.infosystems.grimoire.dto.*
+import itmo.infosystems.grimoire.dto.requests.RegisterRequest
+import itmo.infosystems.grimoire.dto.requests.LoginRequest
+import itmo.infosystems.grimoire.dto.responses.AuthResponse
 import itmo.infosystems.grimoire.services.AuthService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus

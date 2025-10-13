@@ -1,3 +1,5 @@
+package itmo.infosystems.grimoire.dto.requests
+
 import jakarta.validation.constraints.*
 
 data class RegisterRequest(

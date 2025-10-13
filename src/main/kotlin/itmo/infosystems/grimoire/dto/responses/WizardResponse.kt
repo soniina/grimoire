@@ -1,4 +1,4 @@
-package itmo.infosystems.grimoire.dto
+package itmo.infosystems.grimoire.dto.responses
 
 data class WizardResponse(
     val login: String,

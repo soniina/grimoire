@@ -1,6 +1,6 @@
 package itmo.infosystems.grimoire.repositories
 
-import itmo.infosystems.grimoire.dto.WizardResponse
+import itmo.infosystems.grimoire.dto.responses.WizardResponse
 import itmo.infosystems.grimoire.models.Wizard
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
@@ -12,7 +12,7 @@ interface WizardRepository : JpaRepository<Wizard, Long> {
 
     @Query(
         """
-        SELECT new itmo.infosystems.grimoire.dto.WizardResponse(
+        SELECT new itmo.infosystems.grimoire.dto.responses.WizardResponse(
             w.login, 
             g.name, g.level, g.spellsPerDayLimit, g.artifactsInventoryLimit, g.spellsForArtifact,
             h.name, h.surname
