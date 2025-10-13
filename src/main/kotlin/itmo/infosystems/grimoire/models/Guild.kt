@@ -9,13 +9,13 @@ data class Guild (
     @Column(name = "guild_id")
     val id: Long = 0,
 
+    val name: String,
+
     val level: Int,
 
     val spellsPerDayLimit: Int,
 
     val artifactsInventoryLimit: Int,
-
-    val guildName: String,
 
     val spellsForArtifact: Int
 )

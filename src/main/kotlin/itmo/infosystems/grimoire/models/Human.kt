@@ -10,7 +10,7 @@ data class Human (
     @Column(name = "human_id")
     val id: Long = 0,
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "wizard_id")
     val wizard: Wizard? = null,
 
