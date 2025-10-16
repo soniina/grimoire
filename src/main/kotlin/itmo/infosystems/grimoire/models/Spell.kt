@@ -4,18 +4,18 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "spell")
-data class Spell (
+data class Spell(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "spell_id")
     val id: Long = 0,
 
     @Column(unique = true)
-    val spellName: String,
+    val name: String,
 
     @Enumerated(EnumType.STRING)
-    val spellType: SpellType,
+    val type: SpellType,
 
-    val spellDescription: String? = null,
+    val description: String? = null,
 
     val requiredGuildLevel: Int,
 

@@ -3,8 +3,8 @@ package itmo.infosystems.grimoire.models
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "guilds")
-data class Guild (
+@Table(name = "guild")
+data class Guild(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "guild_id")
     val id: Long = 0,
