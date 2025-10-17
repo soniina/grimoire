@@ -5,7 +5,7 @@ import java.time.LocalDate
 
 @Entity
 @Table(name = "spell_cast")
-data class SpellCast (
+data class SpellCast(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "spell_cast_id")
     val id: Long = 0,
@@ -27,6 +27,10 @@ data class SpellCast (
 
     val duration: Int,
 
+    @ManyToOne
+    @JoinColumn(name = "removed_by_wizard_id")
+    var removedByWizard: Wizard? = null,
+
     @Enumerated(EnumType.STRING)
-    val status: SpellCastStatus
+    var status: SpellCastStatus = SpellCastStatus.ACTIVE
 )

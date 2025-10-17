@@ -8,5 +8,6 @@ enum class SpellType {
     CURSE,
     NECROMANCY,
     UTILITY,
-    BUFF
+    BUFF,
+    FORBIDDEN_MAGIC
 }
