@@ -1,6 +1,5 @@
 package itmo.infosystems.grimoire.services
 
-import itmo.infosystems.grimoire.dto.responses.WizardResponse
 import itmo.infosystems.grimoire.models.Wizard
 import itmo.infosystems.grimoire.repositories.GuildRepository
 import itmo.infosystems.grimoire.repositories.WizardRepository
@@ -11,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class WizardService(private val wizardRepository: WizardRepository, private val guildRepository: GuildRepository) {
 
-    fun getWizard(id: Long): WizardResponse {
-        return wizardRepository.findWizardProfile(id)
+    fun getWizard(id: Long): Wizard {
+        return wizardRepository.findById(id)
             .orElseThrow { EntityNotFoundException("Wizard with id $id not found") }
     }
 

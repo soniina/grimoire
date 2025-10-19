@@ -1,6 +1,6 @@
 package itmo.infosystems.grimoire.controllers
 
-import itmo.infosystems.grimoire.dto.responses.WizardResponse
+import itmo.infosystems.grimoire.models.Wizard
 import itmo.infosystems.grimoire.security.WizardPrincipal
 import itmo.infosystems.grimoire.services.WizardService
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*
 class WizardController(private val wizardService: WizardService) {
 
     @GetMapping("/me")
-    fun getMe(@AuthenticationPrincipal principal: WizardPrincipal): WizardResponse {
+    fun getMe(@AuthenticationPrincipal principal: WizardPrincipal): Wizard {
         return wizardService.getWizard(principal.id)
     }
 
     @GetMapping("/{id}")
-    fun getWizard(@PathVariable id: Long): WizardResponse {
+    fun getWizard(@PathVariable id: Long): Wizard {
         return wizardService.getWizard(id)
     }
 
@@ -24,7 +24,7 @@ class WizardController(private val wizardService: WizardService) {
     fun joinGuild(
         @AuthenticationPrincipal principal: WizardPrincipal,
         @PathVariable guildId: Long
-    ): WizardResponse {
+    ): Wizard {
         val updatedWizard = wizardService.joinGuild(principal.id, guildId)
         return wizardService.getWizard(updatedWizard.id)
     }
