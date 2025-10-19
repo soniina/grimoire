@@ -17,4 +17,5 @@ class GuildController(private val guildService: GuildService) {
     fun getAvailableGuilds(@AuthenticationPrincipal principal: WizardPrincipal): List<Guild> {
         return guildService.getAvailableGuilds(principal.id)
     }
+    
 }

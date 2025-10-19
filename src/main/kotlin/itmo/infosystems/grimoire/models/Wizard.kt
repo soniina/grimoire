@@ -1,10 +1,11 @@
 package itmo.infosystems.grimoire.models
 
 import jakarta.persistence.*
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "wizard")
-data class Wizard (
+data class Wizard(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "wizard_id")
     val id: Long = 0,
@@ -16,5 +17,7 @@ data class Wizard (
 
     @ManyToOne
     @JoinColumn(name = "guild_id")
-    val guild: Guild? = null
+    var guild: Guild? = null,
+
+    var lastArtifactAwardTime: LocalDateTime? = null
 )

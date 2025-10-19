@@ -19,7 +19,7 @@ class SpellCastController(private val spellCastService: SpellCastService) {
         return spellCastService.castSpell(principal.id, request)
     }
 
-    @GetMapping("/remove/{id}")
+    @PutMapping("/remove/{id}")
     fun removeSpell(@PathVariable id: Long, @AuthenticationPrincipal principal: WizardPrincipal): SpellCast {
         return spellCastService.removeSpell(principal.id, id)
     }
