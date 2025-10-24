@@ -1,5 +1,6 @@
 package itmo.infosystems.grimoire.services
 
+import itmo.infosystems.grimoire.exceptions.SpellCastException
 import itmo.infosystems.grimoire.dto.requests.SpellCastRequest
 import itmo.infosystems.grimoire.models.SpellCast
 import itmo.infosystems.grimoire.models.SpellCastStatus
@@ -10,6 +11,7 @@ import itmo.infosystems.grimoire.repositories.WizardRepository
 import org.springframework.dao.DataAccessException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDateTime
 
 @Service
 class SpellCastService(
@@ -34,7 +36,7 @@ class SpellCastService(
                     wizard = wizard,
                     victim = victim,
                     spell = spell,
-                    duration = requireNotNull(request.duration)
+                    expireTime = request.expireTime
                 )
             )
         } catch (ex: DataAccessException) {
@@ -73,5 +75,3 @@ class SpellCastService(
         )
     }
 }
-
-class SpellCastException(message: String) : RuntimeException(message)

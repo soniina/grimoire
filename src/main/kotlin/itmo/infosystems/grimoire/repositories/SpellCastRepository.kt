@@ -3,6 +3,7 @@ package itmo.infosystems.grimoire.repositories
 import itmo.infosystems.grimoire.models.SpellCast
 import itmo.infosystems.grimoire.models.SpellCastStatus
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 
 interface SpellCastRepository : JpaRepository<SpellCast, Long> {
@@ -17,4 +18,15 @@ interface SpellCastRepository : JpaRepository<SpellCast, Long> {
         """
     )
     fun findActiveSpellsFromWizardsWithLowerOrEqualGuildLevel(guildLevel: Int, wizardId: Long): List<SpellCast>
+
+    @Modifying
+    @Query(
+        value = """
+    UPDATE spell_cast
+    SET status = 'EXPIRED'
+    WHERE status = 'ACTIVE' AND expire_time <= NOW()
+""", nativeQuery = true
+    )
+    fun expireSpells()
+
 }

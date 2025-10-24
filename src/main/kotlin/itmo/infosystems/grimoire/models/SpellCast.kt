@@ -1,7 +1,7 @@
 package itmo.infosystems.grimoire.models
 
 import jakarta.persistence.*
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "spell_cast")
@@ -22,10 +22,9 @@ data class SpellCast(
     @JoinColumn(name = "spell_id")
     val spell: Spell,
 
-    @Column(name = "cast_time")
-    val castTime: LocalDate = LocalDate.now(),
+    val castTime: LocalDateTime = LocalDateTime.now(),
 
-    val duration: Int,
+    val expireTime: LocalDateTime? = null,
 
     @ManyToOne
     @JoinColumn(name = "removed_by_wizard_id")

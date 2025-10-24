@@ -1,6 +1,7 @@
 package itmo.infosystems.grimoire.dto.requests
 
 import jakarta.validation.constraints.*
+import java.time.LocalDateTime
 
 data class SpellCastRequest(
     @field:NotNull
@@ -11,7 +12,5 @@ data class SpellCastRequest(
     @field:Positive
     val spellId: Long? = null,
 
-    @field:NotNull
-    @field:Positive
-    val duration: Int? = null
+    val expireTime: LocalDateTime? = null
 )
