@@ -8,6 +8,7 @@ build/
 *.http
 application.properties
 *.sql
+*.html
 
 ### STS ###
 .apt_generated

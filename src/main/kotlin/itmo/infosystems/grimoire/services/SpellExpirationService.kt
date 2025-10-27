@@ -11,8 +11,5 @@ class SpellExpirationService(private val spellCastRepository: SpellCastRepositor
 
     @Scheduled(fixedRate = 30_000)
     @Transactional
-    fun expireSpells() {
-        println("lol")
-        println(spellCastRepository.expireSpells())
-    }
+    fun expireSpells() = spellCastRepository.expireSpells()
 }

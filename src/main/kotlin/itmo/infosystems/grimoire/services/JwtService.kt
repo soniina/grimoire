@@ -27,7 +27,6 @@ class JwtService {
         val expiryDate = Date(now.time + expiration)
 
         return Jwts.builder()
-            .setSubject(login)
             .claim("id", id)
             .setIssuedAt(now)
             .setExpiration(expiryDate)
@@ -35,23 +34,19 @@ class JwtService {
             .compact()
     }
 
-    fun getLoginFromToken(token: String): String? {
-        return getClaimsFromToken(token)?.subject
-    }
-
-    fun getWizardIdFromToken(token: String): Long? {
-        return getClaimsFromToken(token)?.get("id", Number::class.java)?.toLong()
+    fun getWizardId(token: String): Long? {
+        return getClaims(token)?.get("id", Number::class.java)?.toLong()
     }
 
     fun validateToken(token: String): Boolean {
         return try {
-            getClaimsFromToken(token)?.expiration?.after(Date()) ?: false
+            getClaims(token)?.expiration?.after(Date()) ?: false
         } catch (ex: Exception) {
             false
         }
     }
 
-    private fun getClaimsFromToken(token: String): Claims? {
+    private fun getClaims(token: String): Claims? {
         return try {
             Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())

@@ -23,19 +23,14 @@ class JwtAuthenticationFilter(private val jwtService: JwtService) : OncePerReque
 
         val token = authHeader.substring(7)
         if (jwtService.validateToken(token)) {
-            val login = jwtService.getLoginFromToken(token)
-            val wizardId = jwtService.getWizardIdFromToken(token)
+            val wizardId = jwtService.getWizardId(token) ?: filterChain.doFilter(request, response)
 
-            if (login != null && wizardId != null) {
-                val authorities = listOf(SimpleGrantedAuthority("ROLE_WIZARD"))
-                val principal = WizardPrincipal(wizardId, login)
-                val authentication = UsernamePasswordAuthenticationToken(
-                    principal, null, authorities
-                ).apply {
-                    details = WebAuthenticationDetailsSource().buildDetails(request)
-                }
-                SecurityContextHolder.getContext().authentication = authentication
+            val authentication = UsernamePasswordAuthenticationToken(
+                wizardId.toString(), null, emptyList()
+            ).apply {
+                details = WebAuthenticationDetailsSource().buildDetails(request)
             }
+            SecurityContextHolder.getContext().authentication = authentication
         }
 
         filterChain.doFilter(request, response)

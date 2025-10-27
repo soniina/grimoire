@@ -18,7 +18,7 @@ class SecurityConfig(private val jwtAuthenticationFilter: JwtAuthenticationFilte
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests { auth ->
                 auth
-                    .requestMatchers("/auth/**").permitAll()
+                    .requestMatchers("/auth/**", "/ws/**").permitAll()
                     .anyRequest().authenticated()
             }
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)

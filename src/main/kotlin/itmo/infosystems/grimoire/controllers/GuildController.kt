@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.security.core.annotation.AuthenticationPrincipal
-import itmo.infosystems.grimoire.security.WizardPrincipal
 import itmo.infosystems.grimoire.models.Guild
+import java.security.Principal
 
 
 @RestController
@@ -14,8 +14,8 @@ import itmo.infosystems.grimoire.models.Guild
 class GuildController(private val guildService: GuildService) {
 
     @GetMapping("/available")
-    fun getAvailableGuilds(@AuthenticationPrincipal principal: WizardPrincipal): List<Guild> {
-        return guildService.getAvailableGuilds(principal.id)
+    fun getAvailableGuilds(@AuthenticationPrincipal principal: Principal): List<Guild> {
+        return guildService.getAvailableGuilds(principal.name.toLong())
     }
-    
+
 }
