@@ -25,12 +25,12 @@ class SpellCastController(private val spellCastService: SpellCastService) {
     }
 
     @GetMapping("/active/mine")
-    fun getMyActiveSpells(@AuthenticationPrincipal principal: Principal): List<SpellCast> {
-        return spellCastService.getActiveSpells(principal.name.toLong())
+    fun getMyActiveSpells(@AuthenticationPrincipal wizardId: String): List<SpellCast> {
+        return spellCastService.getActiveSpells(wizardId.toLong())
     }
 
     @GetMapping("/active/others")
-    fun getOthersActiveSpells(@AuthenticationPrincipal principal: Principal): List<SpellCast> {
-        return spellCastService.getActiveSpellsFromWizardsWithLowerOrEqualGuildLevel(principal.name.toLong())
+    fun getOthersActiveSpells(@AuthenticationPrincipal wizardId: String): List<SpellCast> {
+        return spellCastService.getActiveSpellsFromWizardsWithLowerOrEqualGuildLevel(wizardId.toLong())
     }
 }

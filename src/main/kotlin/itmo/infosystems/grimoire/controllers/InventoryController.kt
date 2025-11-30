@@ -8,14 +8,13 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.security.Principal
 
 @RestController
 @RequestMapping("/inventory")
 class InventoryController(private val inventoryService: InventoryService) {
 
     @GetMapping
-    fun getInventory(@AuthenticationPrincipal principal: Principal, pageable: Pageable): Page<Artifact> {
-        return inventoryService.getInventory(principal.name.toLong(), pageable)
+    fun getInventory(@AuthenticationPrincipal wizardId: String, pageable: Pageable): Page<Artifact> {
+        return inventoryService.getInventory(wizardId.toLong(), pageable)
     }
 }

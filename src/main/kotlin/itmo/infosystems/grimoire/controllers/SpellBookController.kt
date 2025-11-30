@@ -8,7 +8,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.security.Principal
 
 @RestController
 @RequestMapping("/")
@@ -20,9 +19,9 @@ class SpellBookController(private val spellService: SpellService) {
 
     @GetMapping("/my-spellbook")
     fun getMySpellBook(
-        @AuthenticationPrincipal principal: Principal,
+        @AuthenticationPrincipal wizardId: String,
         pageable: Pageable
     ): Page<Spell> {
-        return spellService.getSpellBook(principal.name.toLong(), pageable)
+        return spellService.getSpellBook(wizardId.toLong(), pageable)
     }
 }
