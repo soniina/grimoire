@@ -4,6 +4,7 @@ import itmo.infosystems.grimoire.dto.requests.HumanRequest
 import itmo.infosystems.grimoire.models.Human
 import itmo.infosystems.grimoire.services.VictimService
 import jakarta.validation.Valid
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.*
 class VictimController(private val victimService: VictimService) {
 
     @GetMapping
-    fun getAllVictims(): List<Human> {
-        return victimService.getAll()
+    fun getAvailableVictims(@AuthenticationPrincipal wizardId: String): List<Human> {
+        return victimService.getAvailable(wizardId.toLong())
     }
 
     @PostMapping

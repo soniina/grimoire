@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class VictimService(private val humanRepository: HumanRepository) {
 
-    fun getAll(): List<Human> = humanRepository.findAll()
+    fun getAvailable(wizardId: Long): List<Human> = humanRepository.findAvailable(wizardId)
 
     fun create(request: HumanRequest): Human {
         if (humanRepository.existsByNameAndSurname(requireNotNull(request.name), requireNotNull(request.surname)))
